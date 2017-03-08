@@ -16,7 +16,7 @@ namespace RecipeArchive
             set { _kind = value; }
         }
 
-        class CookBook : GeneralClass
+        public class CookBook : GeneralClass
         {
             private string _nameofdish;
 
@@ -43,7 +43,7 @@ namespace RecipeArchive
             }
         }
 
-        class Games : GeneralClass
+        public class Games : GeneralClass
         {
             private string _name;
 
@@ -53,7 +53,7 @@ namespace RecipeArchive
                 set { _name = value; }
             }
 
-            class Minecraft : Games
+            public class Minecraft : Games
             {
                 private string _resourses;
 
@@ -65,7 +65,7 @@ namespace RecipeArchive
 
                 private string _isused;
 
-                public string IsUsed
+                public string IsUsed //(не)используемые предметы
                 {
                     get { return _isused; }
                     set { _isused = value; }

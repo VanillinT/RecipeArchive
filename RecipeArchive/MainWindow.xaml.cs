@@ -20,9 +20,19 @@ namespace RecipeArchive
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<GeneralClass> Type = new List<GeneralClass>();
+        List<GeneralClass.CookBook> CookingRecepies = new List<GeneralClass.CookBook>();
+        List<GeneralClass.Games> Games = new List<GeneralClass.Games>();
+        List<GeneralClass.Games.Minecraft> MinecraftRecepies = new List<GeneralClass.Games.Minecraft>();
         public MainWindow()
         {
             InitializeComponent();
+            Functions.LoadData();
+        }
+
+        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
