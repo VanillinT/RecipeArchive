@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecipeArchive"
         mc:Ignorable="d"
-        Title="Recepies" Height="600" Width="580">
+        Title="Recepies" Height="700" Width="1000">
     <Grid>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="377" Margin="10,10,0,0" VerticalAlignment="Top" Width="555" SelectionChanged="listBox_SelectionChanged"/>
+        <Frame x:Name="frame" Content="Frame" HorizontalAlignment="Left" Height="653" Margin="10,10,0,0" VerticalAlignment="Top" Width="975"/>
     </Grid>
 </Window>

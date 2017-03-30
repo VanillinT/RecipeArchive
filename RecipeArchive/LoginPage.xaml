@@ -1,0 +1,17 @@
+﻿<Page x:Class="RecipeArchive.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RecipeArchive"
+      mc:Ignorable="d" d:DesignWidth="300"
+      Title="LoginPage" Height="184.539">
+
+    <Grid Margin="0,0,0,10">
+        <Button x:Name="Login" Content="Log in" Margin="160,120,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top"/>
+        <TextBox x:Name="loginBox" Margin="65,50,0,0" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="170" Height="20" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="passwordBox" Margin="65,80,0,0" HorizontalAlignment="Left" Width="170" Height="20" VerticalAlignment="Top"/>
+        <Button x:Name="Register" Content="New User" Margin="65,120,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="Register_Click"/>
+
+    </Grid>
+</Page>

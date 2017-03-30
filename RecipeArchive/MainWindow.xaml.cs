@@ -27,12 +27,8 @@ namespace RecipeArchive
         public MainWindow()
         {
             InitializeComponent();
-            Functions.LoadData();
-        }
-
-        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            frame.NavigationService.Navigate(new Uri("LoginPage.xaml", UriKind.Relative));
+            //Functions.LoadData();
         }
     }
 }
