@@ -16,6 +16,7 @@ namespace RecipeArchive
             set { _kind = value; }
         }
 
+
         public class CookBook : GeneralClass
         {
             private string _nameofdish;
@@ -41,6 +42,14 @@ namespace RecipeArchive
                 get { return _timeofcookong; }
                 set { _timeofcookong = value; }
             }
+            private string _ingredients;
+
+            public string Ingredients
+            {
+                get { return _ingredients; }
+                set { _ingredients = value; }
+            }
+
         }
 
         public class Games : GeneralClass
@@ -72,6 +81,19 @@ namespace RecipeArchive
                 }
 
             }
+            
+            
+        }
+        public class Hookah : GeneralClass
+        {
+            private string _recipe;
+
+            public string Recipe
+            {
+                get { return _recipe; }
+                set { _recipe = value; }
+            }
+
         }
     }
 }

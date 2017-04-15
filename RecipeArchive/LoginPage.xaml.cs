@@ -58,11 +58,11 @@ namespace RecipeArchive
             }
             catch
             {
-                MessageBox.Show("При чтении из файла Users.txt была обнаружена ошибка.");
+                MessageBox.Show("An error appeared while reading Users.txt");
             }
             if (i > 0)
-            {
-                 MessageBox.Show("В ходе загрузки данных из файла было удалено строк с дефектом: {i}");
+            { //
+                 MessageBox.Show("When loading, strings with an error were deleted: {i}.");
             }
         }
         void SaveData()
@@ -91,36 +91,62 @@ namespace RecipeArchive
         {
             if (loginBox.Text != "" && passwordBox.Password != "")
             {
-                bool check = true;
-                while (check)
+                bool check = false;
+                while (!check)
                 {
                     for (int i = 0; i < loginBox.Text.Length; i++)
                     {
-                        if (loginBox.Text[i] == '%')
+                        if (loginBox.Text[i] == '%' || loginBox.Text[i] == ' ')
                         {
-                            MessageBox.Show("В логине были использованы недопустимые символы.");
+                            MessageBox.Show("Invalid characters were used");
                             loginBox.Text = null;
                             break;
                         }
                         else
                         {
-                            check = false;
+                            check = true;
                         }
                     }
+                    break;
                 }
-                if (!check)
+                if (check)
                 {
                     var _newuser = new User(loginBox.Text, CalculateHash(passwordBox.Password));
                     _users.Add(_newuser);
                     SaveData();
                     loginBox.Text = null;
                     passwordBox.Password = null;
+                    MessageBox.Show("New user was succesfully created.");
+                    NavigationService.Navigate(new Uri("MainMenu.xaml", UriKind.Relative));
                 }
             }
             else
             {
-                MessageBox.Show("Заполнены не все поля");
+                MessageBox.Show("Not all fields are filled in.");
             }
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            bool check = false;
+            if (loginBox.Text != "" && passwordBox.Password != "")
+            {
+                string hash = CalculateHash(passwordBox.Password);
+                for (int i = 0; i < _users.Count; i++)
+                {
+                    if (_users[i].Login == loginBox.Text && _users[i].ECPassword == hash)
+                        check = true;
+                    else
+                        continue;
+                }
+                if (check)
+                    NavigationService.Navigate(new Uri("MainMenu.xaml", UriKind.Relative));
+                else
+                    MessageBox.Show("Incorrect credentials entered.");
+            }
+            else
+                MessageBox.Show("Not all fields are filled in.");
+
         }
     }
 }

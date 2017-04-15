@@ -13,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace RecipeArchive
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для MainMenu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainMenu : Page
     {
-        public MainWindow()
+        public MainMenu()
         {
             InitializeComponent();
-            frame.NavigationService.Navigate(new Uri("LoginPage.xaml", UriKind.Relative));
         }
     }
-
 }
