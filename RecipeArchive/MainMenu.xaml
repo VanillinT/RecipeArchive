@@ -4,13 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RecipeArchive"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="MainMenu">
+      mc:Ignorable="d"
+      Title="MainMenu" Width="480.8" Height="334.4">
 
-    <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="Choose the archive:" VerticalAlignment="Top"/>
-        <Grid HorizontalAlignment="Left" Height="269" Margin="0,31,0,0" VerticalAlignment="Top" Width="300"/>
-
+    <Grid Margin="0,0,-0.2,0.4">
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="22,10,0,0" TextWrapping="Wrap" Text="Choose the archive:" VerticalAlignment="Top" Width="111"/>
+        <Button Content="Add new recipe" Margin="190,304,201,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Button_Click"/>
+        <ListBox x:Name="commonBox" Height="268" Margin="10,31,271,0" VerticalAlignment="Top" DisplayMemberPath="Kind"/>
+        <ListBox x:Name="gameBox" Height="268" Margin="251,31,10,0" VerticalAlignment="Top" DisplayMemberPath="Game"/>
+ 
     </Grid>
 </Page>

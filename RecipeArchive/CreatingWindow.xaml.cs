@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 
 namespace RecipeArchive
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для CreatingWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CreatingWindow : Window
     {
-        public MainWindow()
+        public CreatingWindow()
         {
             InitializeComponent();
-            frame.Navigate(new LoginPage());
+            frame.Navigate(new CommonWindow());
         }
-        
     }
-
 }

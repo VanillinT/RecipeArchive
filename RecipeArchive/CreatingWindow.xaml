@@ -1,12 +1,10 @@
-﻿<Window x:Class="RecipeArchive.MainWindow"
+﻿<Window x:Class="RecipeArchive.CreatingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecipeArchive"
         mc:Ignorable="d"
-        Title="Recepies" Height="400" Width="600">
-    <Grid>
-        <Frame x:Name="frame" Content="Frame" HorizontalAlignment="Center" Height="373" Margin="0,0,0.2,-0.2" VerticalAlignment="Center" Width="595" NavigationUIVisibility="Hidden"/>
-    </Grid>
+        Title="CreatingWindow" Height="427.388" Width="318.684">
+    <Frame x:Name="frame" Content="Frame" Height="399" VerticalAlignment="Top" NavigationUIVisibility="Hidden" Margin="0,0,-5,0"/>
 </Window>

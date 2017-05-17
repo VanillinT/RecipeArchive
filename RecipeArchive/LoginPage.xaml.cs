@@ -23,18 +23,25 @@ namespace RecipeArchive
     public partial class LoginPage : Page
     {
         List<User> _users = new List<User>();
+        const string _filename = "Users.txt";
         public LoginPage()
         {
             InitializeComponent();
             LoadUsersData();
         }
 
+        public static string GetUsername()
+        { return _username; }
+        public static bool IsLogged()
+        { return logged; }
+        static bool logged = false;
+        static string _username;
         void LoadUsersData() //загрузка из файла Users.txt пар "логин-пароль(хэш)"
         {
             int i = 0;
             try
             {
-                using (var sr = new StreamReader("Users.txt"))
+                using (var sr = new StreamReader(_filename))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -42,7 +49,7 @@ namespace RecipeArchive
                         var parts = line.Split('%');
                         if (parts.Count() == 2)
                         {
-                            string login = parts[0];
+                            string login = parts[0].ToLower();
                             string ECpassword = parts[1];
                             var _user = new User(login, ECpassword);
                             _users.Add(_user);
@@ -62,16 +69,16 @@ namespace RecipeArchive
             }
             if (i > 0)
             { //
-                 MessageBox.Show("When loading, strings with an error were deleted: {i}.");
+                 MessageBox.Show("When loading, strings with an error were deleted: {0}.", i.ToString());
             }
         }
         void SaveData()
         {
-            using (var sw = new StreamWriter("Users.txt"))
+            using (var sw = new StreamWriter(_filename))
             {
                 foreach (var user in _users)
                 {
-                    sw.WriteLine($"{user.Login}%{user.ECPassword}");
+                    sw.WriteLine($"{user.Login.ToLower()}%{user.ECPassword}");
                 }
             }
         }
@@ -82,13 +89,14 @@ namespace RecipeArchive
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
             {
-                sb.Append(hash[i].ToString());
+                sb.Append(hash[i].ToString("x2"));
             }
             return sb.ToString();
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
+
             if (loginBox.Text != "" && passwordBox.Password != "")
             {
                 bool check = false;
@@ -117,7 +125,7 @@ namespace RecipeArchive
                     loginBox.Text = null;
                     passwordBox.Password = null;
                     MessageBox.Show("New user was succesfully created.");
-                    NavigationService.Navigate(new Uri("MainMenu.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new MainMenu());
                 }
             }
             else
@@ -125,9 +133,9 @@ namespace RecipeArchive
                 MessageBox.Show("Not all fields are filled in.");
             }
         }
-
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+
             bool check = false;
             if (loginBox.Text != "" && passwordBox.Password != "")
             {
@@ -140,13 +148,22 @@ namespace RecipeArchive
                         continue;
                 }
                 if (check)
-                    NavigationService.Navigate(new Uri("MainMenu.xaml", UriKind.Relative));
+                {
+                    NavigationService.Navigate(new MainMenu());
+                    _username = loginBox.Text;
+                }
                 else
                     MessageBox.Show("Incorrect credentials entered.");
             }
             else
                 MessageBox.Show("Not all fields are filled in.");
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            logged = false;
+            NavigationService.Navigate(new MainMenu());
         }
     }
 }

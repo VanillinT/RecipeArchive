@@ -13,20 +13,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace RecipeArchive
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для GameWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameWindow : Page
     {
-        public MainWindow()
+        public GameWindow()
         {
             InitializeComponent();
-            frame.Navigate(new LoginPage());
         }
-        
-    }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(Pages.CommonWindow);
+            checkBox.IsChecked = true;
+        }
+    }
 }

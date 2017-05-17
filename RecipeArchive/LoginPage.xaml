@@ -4,17 +4,18 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RecipeArchive"
-      mc:Ignorable="d" d:DesignWidth="300"
-      Title="LoginPage" Height="184.539">
+      mc:Ignorable="d"
+      Title="LoginPage" Height="188.005" Width="277.326" HorizontalAlignment="Center">
 
-    <Grid Margin="0,0,0,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="Login" Content="Log in" Margin="160,120,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="Login_Click"/>
-        <TextBox x:Name="loginBox" Margin="65,50,0,0" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="170" Height="20" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="passwordBox" Margin="65,80,0,0" HorizontalAlignment="Left" Width="170" Height="20" VerticalAlignment="Top"/>
-        <Button x:Name="Register" Content="New User" Margin="65,120,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="Register_Click"/>
+    <Grid Margin="5,0,0.2,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="188" Width="272">
+        <Button x:Name="Login" Content="Log in" Margin="175,110,37,0" Height="20" VerticalAlignment="Top" Click="Login_Click"/>
+        <TextBox x:Name="loginBox" Margin="65,50,37,0" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" Height="20" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="passwordBox" Margin="65,80,37,0" Height="20" VerticalAlignment="Top"/>
+        <Button x:Name="Register" Content="New User" Margin="175,134,37,0" Height="20" VerticalAlignment="Top" Click="Register_Click"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Login:" VerticalAlignment="Top" Margin="28,50,0,0" Height="20"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Height="20"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Center" Margin="85,19,0,0" TextWrapping="Wrap" Text="Authorization" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock2" Margin="117,20,83,0" TextWrapping="Wrap" Text="Authorization" VerticalAlignment="Top"/>
+        <Button Content="Use as guest" Margin="65,110,137,0" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
 </Page>
