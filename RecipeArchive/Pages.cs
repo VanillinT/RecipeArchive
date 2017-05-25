@@ -40,5 +40,13 @@ namespace RecipeArchive
                 return _commonWindow;
             }
         }
+        static RecipePage _recipePage = new RecipePage();
+        public static RecipePage RecipePage
+        {
+            get
+            {
+                return _recipePage;
+            }
+        }
     }
 }

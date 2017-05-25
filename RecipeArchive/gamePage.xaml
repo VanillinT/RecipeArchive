@@ -1,0 +1,23 @@
+﻿<Page x:Class="RecipeArchive.gamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RecipeArchive"
+      mc:Ignorable="d" d:DesignWidth="300"
+      Title="gamePage" Height="154.95">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,5,0,0" TextWrapping="Wrap" Text="Game:" VerticalAlignment="Top"/>
+        <TextBox x:Name="nameBox" Height="19" Margin="85,31,70,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.083,-0.652" KeyDown="nameBox_KeyDown"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,31,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="16" Width="37"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="Link:" VerticalAlignment="Top" Width="25" RenderTransformOrigin="0.6,-0.376"/>
+        <TextBox x:Name="linkBox" Height="21" Margin="85,55,10,0" TextWrapping="Wrap" VerticalAlignment="Top" KeyDown="linkBox_KeyDown"/>
+        <Button x:Name="saveButton" Content="Save" Margin="235,0,10,10.2" Height="20" VerticalAlignment="Bottom" Click="saveButton_Click"/>
+        <Button x:Name="editButton" Content="Edit" Margin="175,0,70,10.2" Height="20" VerticalAlignment="Bottom" Click="editButton_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,82,0,0" TextWrapping="Wrap" Text="Ingredients:" VerticalAlignment="Top"/>
+        <TextBox x:Name="ingBox" HorizontalAlignment="Left" Height="34" Margin="85,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="205" KeyDown="ingBox_KeyDown"/>
+        <ComboBox x:Name="gameBox" HorizontalAlignment="Left" Margin="85,5,0,0" VerticalAlignment="Top" Width="145" Height="21" IsEditable="True"/>
+
+    </Grid>
+</Page>

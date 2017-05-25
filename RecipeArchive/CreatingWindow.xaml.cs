@@ -24,5 +24,33 @@ namespace RecipeArchive
             InitializeComponent();
             frame.Navigate(new CommonWindow());
         }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (Pages.GameWindow == null)
+                    frame.Navigate(new GameWindow());
+                else
+                    frame.Navigate(Pages.GameWindow);
+            }
+            catch
+            {
+                frame.Navigate(new GameWindow());
+            }
+        }
+
+        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+            frame.Navigate(Pages.CommonWindow);
+            }
+            catch
+            {
+                frame.Navigate(new CommonWindow());
+            }
+        }
+        
     }
 }

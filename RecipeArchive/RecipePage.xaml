@@ -1,0 +1,20 @@
+﻿<Page x:Class="RecipeArchive.RecipePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RecipeArchive"
+      mc:Ignorable="d" d:DesignWidth="300"
+      Title="RecipePage" Height="320" HorizontalAlignment="Center">
+
+    <Grid>
+        <ListBox x:Name="itemBox" Height="255" Margin="10,35,10,0" VerticalAlignment="Top" DisplayMemberPath="Name" MouseDoubleClick="itemBox_MouseDoubleClick"/>
+        <Button x:Name="deletingButton" Content="Delete" Margin="230,295,10,0" VerticalAlignment="Top" Click="deletingButton_Click"/>
+        <Button x:Name="backButton" Content="&lt; Go back" Margin="10,295,215,0" VerticalAlignment="Top" Click="backButton_Click"/>
+        <ComboBox x:Name="comboBox" Margin="119,10,11,0" VerticalAlignment="Top" Height="20" IsEditable="True" DisplayMemberPath="Name" KeyDown="comboBox_KeyDown"/>
+        <TextBlock HorizontalAlignment="Left" Margin="76,10,0,0" TextWrapping="Wrap" Text="Search:" VerticalAlignment="Top"/>
+        <Button x:Name="refreshButton" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="21" Click="refreshButton_Click" Height="20">
+            <Image x:Name="Refresh" Source="http://simpleicon.com/wp-content/uploads/refresh.png"/>
+        </Button>
+    </Grid>
+</Page>

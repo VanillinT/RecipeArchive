@@ -5,23 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RecipeArchive"
       mc:Ignorable="d" d:DesignWidth="300"
-      Title="CommonWindow" Height="390">
+      Title="CommonWindow" Height="370">
 
-    <Grid>
-
-        <CheckBox x:Name="checkBox" Content="Is recipe for a game?" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
-        <TextBox x:Name="kindBox" Height="23" Margin="10,51,108,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="nameBox" Height="23" Margin="10,100,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,30,0,0" TextWrapping="Wrap" Text="Kind of recipe (dessert/hookah/etc.)" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,79,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
-        <TextBox x:Name="linkBox" Height="23" Margin="10,149,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,128,0,0" TextWrapping="Wrap" Text="(Optional) A link from the internet:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,177,0,0" TextWrapping="Wrap" Text="(Optional) Time of cooking in minutes:" VerticalAlignment="Top"/>
-        <TextBox x:Name="timeBox" Height="23" Margin="10,198,204,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,226,0,0" TextWrapping="Wrap" Text="The recipe itself:" VerticalAlignment="Top"/>
-        <TextBox x:Name="recipeBox" Height="107" Margin="10,247,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Content="Add recipe" HorizontalAlignment="Left" Margin="215,360,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="195,51,0,0" VerticalAlignment="Top" Width="95" Height="23"/>
+    <Grid Margin="0,0,0,0">
+        <TextBox x:Name="nameBox" Height="23" Margin="10,80,10,0" TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="nameBox_LostFocus"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Kind of recipe (dessert/hookah/etc.)" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
+        <TextBox x:Name="linkBox" Height="23" Margin="10,129,10,0" TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="linkBox_LostFocus"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" Text="(Optional) A link from the internet:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,157,0,0" TextWrapping="Wrap" Text="(Optional) Time of cooking in minutes:" VerticalAlignment="Top"/>
+        <TextBox x:Name="timeBox" Height="23" Margin="10,178,204,0" TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="timeBox_LostFocus"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,206,0,0" TextWrapping="Wrap" Text="The recipe itself:" VerticalAlignment="Top"/>
+        <TextBox x:Name="recipeBox" Margin="10,227,10,36" TextWrapping="Wrap" LostFocus="recipeBox_LostFocus"/>
+        <Button Content="Add recipe" Margin="215,0,10,10" Click="Button_Click" Height="21" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="kindBox" Margin="10,31,10,0" VerticalAlignment="Top" Height="23" SelectionChanged="kindBox_SelectionChanged" IsEditable="True" LostFocus="kindBox_LostFocus"/>
     </Grid>
 
 </Page>

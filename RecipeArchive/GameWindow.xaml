@@ -5,22 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RecipeArchive"
       mc:Ignorable="d" d:DesignWidth="300"
-      Title="GameWindow" Height="390">
+      Title="GameWindow" Height="370">
 
     <Grid>
-        <CheckBox x:Name="checkBox" Content="Is recipe for a game?" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Unchecked="CheckBox_Checked" IsChecked="True"/>
-        <TextBox x:Name="gameBox" Height="23" Margin="10,51,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="nameBox" Height="23" Margin="10,100,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,30,0,0" TextWrapping="Wrap" Text="Name of the game:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,79,0,0" TextWrapping="Wrap" Text="Name of the item:" VerticalAlignment="Top"/>
-        <TextBox x:Name="linkBox" Height="23" Margin="10,149,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,128,0,0" TextWrapping="Wrap" Text="A link from the internet (optional)" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,177,0,0" TextWrapping="Wrap" Text="Ingredient/amount:" VerticalAlignment="Top"/>
-        <TextBox x:Name="ingBox" Height="23" Margin="10,198,169,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="amountBox" Height="23" Margin="131,198,146,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Content="Add ingredient" Margin="202,198,14,0" VerticalAlignment="Top" Height="23"/>
-        <TextBlock x:Name="ingBlock" HorizontalAlignment="Left" Margin="10,226,0,0" TextWrapping="Wrap" Text="Ingredients:" VerticalAlignment="Top" Width="276" Height="129"/>
-        <Button Content="Add recipe" HorizontalAlignment="Left" Margin="215,360,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="nameBox" Height="23" Margin="10,80,10,0" TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="nameBox_LostFocus"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Name of the game:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Name of the item:" VerticalAlignment="Top" />
+        <TextBox x:Name="linkBox" Height="23" Margin="10,129,10,0" TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="linkBox_LostFocus"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" Text="A link from the internet (optional)" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,157,0,0" TextWrapping="Wrap" Text="Ingredient/amount:" VerticalAlignment="Top"/>
+        <TextBox x:Name="ingBox" Height="23" Margin="10,178,169,0" TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="ingBox_LostFocus"/>
+        <TextBox x:Name="amountBox" Height="23" Margin="131,178,146,0" TextWrapping="Wrap" VerticalAlignment="Top" LostFocus="amountBox_LostFocus"/>
+        <Button Content="Add ingredient" Margin="202,178,14,0" VerticalAlignment="Top" Height="23" Click="Button_Click"/>
+        <TextBlock x:Name="ingBlock" Margin="80,206,14,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="39"/>
+        <Button Content="Add recipe" Margin="215,340,10,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <ComboBox x:Name="gameBox" Margin="10,31,10,0" VerticalAlignment="Top" Height="23" SelectionChanged="gameBox_SelectionChanged" LostFocus="gameBox_LostFocus" IsEditable="True"/>
+        <TextBlock Margin="10,206,225,0" TextWrapping="Wrap" Text="Ingredients:" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

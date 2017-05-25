@@ -38,10 +38,10 @@ namespace RecipeArchive
             set { _text = value; }
         }
 
-        private int _time;
+        private string _time;
 
         [DataMember]
-        public int Time
+        public string Time
         {
             get { return _time; }
             set { _time = value; }
@@ -56,7 +56,7 @@ namespace RecipeArchive
             set { _link = value; }
         }
 
-        public CommonRecipes(string k, string n, string s, string l, int t)
+        public CommonRecipes(string k, string n, string s, string l, string t)
         {
             _kind = k;
             _name = n;
@@ -90,7 +90,7 @@ namespace RecipeArchive
         private string _ingred;
 
         [DataMember]
-        public string Ingred
+        public string Ingredients
         {
             get { return _ingred; }
             set { _ingred = value; }

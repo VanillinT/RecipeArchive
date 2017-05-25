@@ -23,25 +23,32 @@ namespace RecipeArchive
     public partial class LoginPage : Page
     {
         List<User> _users = new List<User>();
-        const string _filename = "Users.txt";
+        const string _usersfilename = "Users.txt";
         public LoginPage()
         {
             InitializeComponent();
             LoadUsersData();
+            loginBox.Focus();
         }
-
-        public static string GetUsername()
-        { return _username; }
+        //methods
+        static bool _logged = false;
         public static bool IsLogged()
-        { return logged; }
-        static bool logged = false;
+        { return _logged; }
+
         static string _username;
-        void LoadUsersData() //загрузка из файла Users.txt пар "логин-пароль(хэш)"
+        public static string Username()
+        { return _username; }
+
+        static string _filename;
+        public static string FileName()
+        { return _filename; }
+
+        void LoadUsersData()
         {
             int i = 0;
             try
             {
-                using (var sr = new StreamReader(_filename))
+                using (var sr = new StreamReader(_usersfilename))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -68,13 +75,13 @@ namespace RecipeArchive
                 MessageBox.Show("An error appeared while reading Users.txt");
             }
             if (i > 0)
-            { //
+            {
                  MessageBox.Show("When loading, strings with an error were deleted: {0}.", i.ToString());
             }
         }
         void SaveData()
         {
-            using (var sw = new StreamWriter(_filename))
+            using (var sw = new StreamWriter(_usersfilename))
             {
                 foreach (var user in _users)
                 {
@@ -93,37 +100,72 @@ namespace RecipeArchive
             }
             return sb.ToString();
         }
-
+        void DeleteSpaces(TextBox box)
+        {
+            try
+            {
+                while (true)
+                {
+                    if (box.Text[0] == ' ')
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 1; i < box.Text.Length; i++)
+                        {
+                            sb.Append(box.Text[i]);
+                        }
+                        box.Text = sb.ToString();
+                    }
+                    else
+                        break;
+                }
+                while (true)
+                {
+                    if (box.Text[box.Text.Length - 1] == ' ')
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < box.Text.Length - 1; i++)
+                        {
+                            sb.Append(box.Text[i]);
+                        }
+                        box.Text = sb.ToString();
+                    }
+                    else
+                        break;
+                }
+            }
+            catch { }
+        }
+        //events
         private void Register_Click(object sender, RoutedEventArgs e)
         {
 
             if (loginBox.Text != "" && passwordBox.Password != "")
             {
-                bool check = false;
-                while (!check)
-                {
+                bool _check = false;
                     for (int i = 0; i < loginBox.Text.Length; i++)
                     {
                         if (loginBox.Text[i] == '%' || loginBox.Text[i] == ' ')
                         {
                             MessageBox.Show("Invalid characters were used");
                             loginBox.Text = null;
+                            _check = false;
                             break;
                         }
                         else
                         {
-                            check = true;
+                            _check = true;
                         }
                     }
-                    break;
-                }
-                if (check)
+                if (_check)
                 {
                     var _newuser = new User(loginBox.Text, CalculateHash(passwordBox.Password));
                     _users.Add(_newuser);
                     SaveData();
+                    _username = loginBox.Text;
+                    _filename = _username + "recipes.txt";
                     loginBox.Text = null;
                     passwordBox.Password = null;
+                    _logged = true;
                     MessageBox.Show("New user was succesfully created.");
                     NavigationService.Navigate(new MainMenu());
                 }
@@ -136,21 +178,23 @@ namespace RecipeArchive
         private void Login_Click(object sender, RoutedEventArgs e)
         {
 
-            bool check = false;
+            bool _check = false;
             if (loginBox.Text != "" && passwordBox.Password != "")
             {
                 string hash = CalculateHash(passwordBox.Password);
                 for (int i = 0; i < _users.Count; i++)
                 {
                     if (_users[i].Login == loginBox.Text && _users[i].ECPassword == hash)
-                        check = true;
+                        _check = true;
                     else
                         continue;
                 }
-                if (check)
+                if (_check)
                 {
-                    NavigationService.Navigate(new MainMenu());
                     _username = loginBox.Text;
+                    _filename = _username + "recipes.txt";
+                    _logged = true;
+                    NavigationService.Navigate(new MainMenu());
                 }
                 else
                     MessageBox.Show("Incorrect credentials entered.");
@@ -160,10 +204,27 @@ namespace RecipeArchive
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Guest_Click(object sender, RoutedEventArgs e)
         {
-            logged = false;
+            _logged = false;
             NavigationService.Navigate(new MainMenu());
+        }
+
+        private void loginBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DeleteSpaces(loginBox);
+        }
+
+        private void loginBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                passwordBox.Focus();
+        }
+
+        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                Login_Click(sender, e);
         }
     }
 }

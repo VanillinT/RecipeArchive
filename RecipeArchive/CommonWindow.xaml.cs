@@ -24,82 +24,212 @@ namespace RecipeArchive
     public partial class CommonWindow : Page
     {
         DataContractJsonSerializer jsonFormatter4common = new DataContractJsonSerializer(typeof(List<CommonRecipes>));
-        List<CommonRecipes> _common = new List<CommonRecipes>();
 
         public CommonWindow()
         {
             InitializeComponent();
-            using (FileStream fs = new FileStream("AllCommon.txt", FileMode.OpenOrCreate, FileAccess.Read))
-            {
-                if (fs.Length > 0)
-                {
-                    var readrecipes = (List<CommonRecipes>)jsonFormatter4common.ReadObject(fs);
-                    foreach (var recipe in readrecipes)
-                        _common.Add(recipe);
-                }
-            }
-            if (_common.Count > 0)
+            FillComboBox();
+        }
+
+        //methods
+        void FillComboBox()
+        {
+            if (MainMenu.CommonList().Count > 0)
             {
                 List<string> kinds = new List<string>();
-                foreach (CommonRecipes rec in _common)
-                    kinds.Add(rec.Kind);
-                comboBox.ItemsSource = kinds;
+                foreach (CommonRecipes recipe in MainMenu.CommonList())
+                {
+                    int met = 0;
+                    foreach (var kind in kinds)
+                        if (kind == recipe.Kind)
+                            met += 1;
+                    if (met == 0)
+                        kinds.Add(recipe.Kind);
+                }
+                kindBox.ItemsSource = kinds;
             }
         }
-        public void SaveData()
+
+        void ClearAll()
         {
-            using (FileStream fs = new FileStream("AllCommon.txt", FileMode.OpenOrCreate, FileAccess.Write))
+            kindBox.SelectedItem = null;
+            nameBox.Clear();
+            recipeBox.Clear();
+            linkBox.Clear();
+            timeBox.Clear();
+        }
+
+        void Save(List<CommonRecipes> _list, int where)
+        {
+            if (where == 1)
             {
-                jsonFormatter4common.WriteObject(fs, _common);
+                using (FileStream fs = new FileStream("AllCommon.txt", FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    jsonFormatter4common.WriteObject(fs, _list);
+                }
+            }
+            if(where == 2)
+            {
+                using (FileStream fs = new FileStream(LoginPage.FileName(), FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    jsonFormatter4common.WriteObject(fs, _list);
+                }
             }
         }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        void DeleteSpaces(TextBox box)
         {
-            checkBox.IsChecked = false;
-            if (Pages.GameWindow == null)
-                NavigationService.Navigate(new GameWindow());
-            else
-                NavigationService.Navigate(Pages.GameWindow);
-
-
+            try
+            {
+                while (true)
+                {
+                    if (box.Text[0] == ' ')
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 1; i < box.Text.Length; i++)
+                        {
+                            sb.Append(box.Text[i]);
+                        }
+                        box.Text = sb.ToString();
+                    }
+                    else
+                        break;
+                }
+                while (true)
+                {
+                    if (box.Text[box.Text.Length - 1] == ' ')
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < box.Text.Length - 1; i++)
+                        {
+                            sb.Append(box.Text[i]);
+                        }
+                        box.Text = sb.ToString();
+                    }
+                    else
+                        break;
+                }
+            }
+            catch { }
         }
-        
+
+        void DeleteSpaces(ComboBox box)
+        {
+            try
+            {
+                while (true)
+                {
+                    if (box.Text[0] == ' ')
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 1; i < box.Text.Length; i++)
+                        {
+                            sb.Append(box.Text[i]);
+                        }
+                        box.Text = sb.ToString();
+                    }
+                    else
+                        break;
+                }
+                while (true)
+                {
+                    if (box.Text[box.Text.Length - 1] == ' ')
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < box.Text.Length - 1; i++)
+                        {
+                            sb.Append(box.Text[i]);
+                        }
+                        box.Text = sb.ToString();
+                    }
+                    else
+                        break;
+                }
+            }
+            catch { }
+        }
+        bool CheckBoxes()
+        {
+            bool _allfine;
+            int _mistakes = 0;
+            if (kindBox.Text == "")
+                _mistakes += 1;
+            if (nameBox.Text == "")
+                _mistakes += 1;
+            if (recipeBox.Text == "")
+                _mistakes += 1;
+            if (_mistakes == 0)
+                _allfine = true;
+            else
+                _allfine = false;
+            return _allfine;
+        }
+
+        //events
+        string _kind, _name, _link, _recipe, _time;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            bool KBisOK=false, NBisOK, RBisOK, LBisOK, TBisOK;
-            if (kindBox.Text != "")
+            if (CheckBoxes())
             {
-                int i = 0;
-                foreach (char c in kindBox.Text)
+                CommonRecipes _commonRecipe = new CommonRecipes(_kind, _name, _recipe, _link, _time);
+                MainMenu.CommonList().Add(_commonRecipe);
+                if (LoginPage.IsLogged())
                 {
-                    try
-                    {
-                        int.Parse(c.ToString());
-                        i++;
-                    }
-                    catch
-                    {
-                        continue;
-                    }
+                    MainMenu.UsersList().Add(_commonRecipe);
+                    Save(MainMenu.UsersList(), 2);
                 }
-                if (i == 0)
-                {
-                    KBisOK = true;
-                }
-            }
-            if (nameBox.Text == "")
-            {
-                NBisOK = false;
+                Save(MainMenu.CommonList(), 1);
+                ClearAll();
+                FillComboBox();
+                _kind = _name = _recipe = _link = _time = null;
+                // Pages.MainMenu.LoadData(); не работает, приходится использовать кнопку "Refresh" с точно таким же методом.
             }
             else
-                NBisOK = true;
-            if (recipeBox.Text == "")
+                MessageBox.Show("Not all fields are filled in.");
+        }
+
+        private void kindBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                _kind = kindBox.Text;
+        }
+
+        private void kindBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DeleteSpaces(kindBox);
+            _kind = kindBox.Text;
+        }
+
+        private void timeBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DeleteSpaces(timeBox);
+            if (timeBox.Text != "")
             {
-                RBisOK = false;
+                try
+                {
+                    int.Parse(timeBox.Text);
+                    _time = timeBox.Text;
+                }
+                catch
+                {
+                    MessageBox.Show("You can only use numbers for time");
+                    timeBox.Clear();
+                }
             }
-            else
-                RBisOK = true;
+        }
+
+        private void recipeBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DeleteSpaces(recipeBox);
+
+            if (recipeBox.Text != "")
+            {
+                _recipe = recipeBox.Text;
+            }
+        }
+
+        private void linkBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DeleteSpaces(linkBox);
+
             if (linkBox.Text != "")
             {
                 int i = 0;
@@ -109,41 +239,20 @@ namespace RecipeArchive
                         i++;
                 }
                 if (i <= 2)
-                    LBisOK = true;
+                    _link = linkBox.Text;
                 else
-                    LBisOK = false;
-            }
-            else
-                LBisOK = true;
-            if (!LBisOK)
-                MessageBox.Show("Make sure the link is right");
-            try
-            {
-                int.Parse(timeBox.Text);
-                TBisOK = true;
-            }
-            catch
-            {
-                TBisOK = false;
-            }
-            if (KBisOK && NBisOK && RBisOK && LBisOK && TBisOK)
-            {
-                CommonRecipes _commonRecipe = new CommonRecipes(kindBox.Text, nameBox.Text, recipeBox.Text, linkBox.Text, int.Parse(timeBox.Text));
-                _common.Add(_commonRecipe);
-                SaveData();
-                kindBox.Clear();
-                nameBox.Clear();
-                recipeBox.Clear();
-                linkBox.Clear();
-                timeBox.Clear();
-                SaveData();
-                Pages.MainMenu.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Make sure everything is fine");
+                    linkBox.Clear();
             }
         }
-        
+
+        private void nameBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DeleteSpaces(nameBox);
+
+            if (nameBox.Text != "")
+            {
+                _name = nameBox.Text;
+            }
+        }
     }
 }
