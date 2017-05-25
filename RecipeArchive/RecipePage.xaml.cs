@@ -36,6 +36,7 @@ namespace RecipeArchive
         {
             if (MainMenu.ChosenIsCommon())
             {
+                _commonlist.Clear();
                 foreach (var item in MainMenu.CommonList())
                     if (item.Kind == MainMenu.GetChosenKind())
                         _commonlist.Add(item);
@@ -44,6 +45,7 @@ namespace RecipeArchive
             }
             else
             {
+                _gamelist.Clear();
                 foreach (var item in MainMenu.GameList())
                     if (item.Game.ToLower() == MainMenu.GetChosenKind().ToLower())
                         _gamelist.Add(item);
@@ -96,10 +98,15 @@ namespace RecipeArchive
                 {
                     try
                     {
+                        List<CommonRecipes> _searchlist = new List<CommonRecipes>();
                         foreach (var item in _commonlist)
-                            if (comboBox.Text != item.Name)
-                                _commonlist.Remove(item);
-                        itemBox.ItemsSource = _commonlist;
+                            if (comboBox.Text == item.Name)
+                            {
+                                _searchlist.Add(item);
+                                itemBox.ItemsSource = _searchlist;
+                                break;
+                            }
+                        
                     }
                     catch
                     {
